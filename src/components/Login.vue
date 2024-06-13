@@ -5,21 +5,22 @@
             <div class="avatar_box">
                 <img src="../assets/logo.png" alt="">
             </div>
-            <el-form :model="form" label-width="auto" style="max-width: 600px" class="fp" >
-             <el-form-item label="用户名">
-             <el-input prefix-icon="User"  v-model="form.name"/>
+            <el-form  ref="loginformref":model="loginForm" label-width="auto" style="max-width: 600px" 
+                :rules="loginFormRules"
+                class="fp" >
+             <el-form-item label="用户名" prop="username">
+             <el-input prefix-icon="User"  v-model="loginForm.username"/>
             </el-form-item>
 
 
 
-            <el-form-item label="密码">
-             <el-input prefix-icon="Lock" v-model="form.password" type="password"/>
+            <el-form-item label="密码" prop="password">
+             <el-input prefix-icon="Lock" v-model="loginForm.password" type="password"/>
             </el-form-item>
 
             <el-form-item class="bp">
                 <div class="bp">
-                    <el-button type="primary">登录</el-button>
-                    <!--<el-button type="info">Primary</el-button>-->
+                    <el-button type="primary" v-on:click="login_a">登录</el-button>
                 </div>
             </el-form-item>
 
@@ -28,13 +29,51 @@
     </div>
 </template>
 
-<script setup>
-    import { reactive } from 'vue'
-    const form = reactive({
-        name: '',
-        password:'',
-    })
-    // export default {}
+<script>
+import { ref } from'vue';
+export default {
+  /*setup() {
+    const loginformref = ref(null);
+    const login_a = () => {
+        //loginformref.value.focus();
+        //console.log(loginformref);
+        console.log("fsf");
+    };
+    return {
+        loginformref,
+        login_a,
+    };
+  },*/
+  data() {
+    return {
+      loginForm: {
+        username: 'admin',
+        password: '123456',
+      },
+      loginFormRules: {
+        username: [ 
+          { required: true, message: '用户名不能为空', trigger: 'blur' },
+          { min: 3, max: 10, message: '用户名长度为3-10个字符', trigger: 'blur' }
+        ],
+        password: [ 
+          { required: true, message: '密码不能为空', trigger: 'blur' },
+          { min: 6, max: 15, message: '密码长度为6-15个字符', trigger: 'blur' }
+        ],
+      },
+    }
+  },
+  methods:{
+    login_a(){
+        //console.log();
+        this.$refs.loginformref.validate((a)=>{
+            console.log(a);
+        });
+    }
+
+  }
+};
+
+
 </script>
 
 <style lang="less" scoped>
