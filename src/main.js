@@ -10,16 +10,17 @@ import {ElForm,ElFormItem} from 'element-plus'
 import {ElInput} from 'element-plus'
 import { h } from 'vue'
 import { ElMessage } from 'element-plus'
-
+import {ElContainer,ElHeader,ElAside,ElMain} from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import axios from 'axios'
 
 const app = createApp(App);
-axios.defaults.baseURL='http://127.0.0.1:8888/register'
+axios.defaults.baseURL='http://127.0.0.1:8888/api/private/v1/'
 app.config.globalProperties.$http = axios
 
 app.use(router).use(ElMessage)
-    .use(ElementPlus).use(ElButton).use(ElForm).use(ElFormItem).use(ElInput);
+    .use(ElementPlus).use(ElButton).use(ElForm).use(ElFormItem).use(ElInput)
+    .use(ElContainer).use(ElHeader).use(ElAside).use(ElMain);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }

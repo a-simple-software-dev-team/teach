@@ -17,7 +17,10 @@
             <el-form-item label="密码" prop="password">
              <el-input prefix-icon="Lock" v-model="loginForm.password" type="password"/>
             </el-form-item>
-              
+            <el-form-item label="邮箱" >
+             <el-input   v-model="loginForm.email"/>
+            </el-form-item>
+           
             <el-form-item label="角色">
               <el-select
                 v-model="loginForm.role"
@@ -29,11 +32,9 @@
               </el-select>
             </el-form-item>
 
-       
             <el-form-item class="bp">
                 <div class="bp">
-                    <el-button type="primary" v-on:click="login_a">登录</el-button>
-                    <el-button type="success" v-on:click="register">注册</el-button>
+                    <el-button type="primary" v-on:click="login_a">注册</el-button>
                 </div>
             </el-form-item>
 
@@ -52,7 +53,7 @@ export default {
       loginForm: {
         username: 'admin',
         password: '123456',
-      
+        email:'',
         role:'',
       },
       loginFormRules: {
@@ -75,24 +76,12 @@ export default {
            if(!a) return;
            const res1=this.loginForm;
            console.log(res1);
-      //     console.log(res.data);
-            if(this.loginForm.role=='tutor')
-            {
-              this.$router.push('/tutors')
-
-            }
-            else{
-              this.$router.push('/student')
-
-            }
+      //    console.log(res.data);
+            this.$router.push('/Login');
 
            
          
         });
-    },
-    register(){
-        this.$router.push('/register')
-
     }
 
   }
